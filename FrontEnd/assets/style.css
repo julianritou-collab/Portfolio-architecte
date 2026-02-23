@@ -59,7 +59,7 @@ header {
 	margin: 50px 0
 }
 section {
-	margin: 50px 0
+	margin: 50px 0 
 }
 
 h1{
@@ -184,5 +184,21 @@ footer nav ul {
 	display: flex;
 	justify-content: flex-end;
 	margin: 2em
+}
+
+/* mise en page provisoire */
+* {
+	background-color: #FFFEF8;
+}
+
+#portfolio {
+	margin-left: 95px;
+	margin-right: 95px;
+}
+
+.gallery figcaption {
+    color: #3d3d3d;
+    font-size: 13px;
+    margin-top: 6px;
 }
 
