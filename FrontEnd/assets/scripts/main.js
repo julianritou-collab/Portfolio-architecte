@@ -1,5 +1,5 @@
 import { getWorks , getCategories} from './api.js'
-import { displayWorks, displayCategories } from './works.js'
+import { displayWorks, displayCategories , filterManager } from './works.js'
 //point d'entrée de l'application
 console.log("main.js chargé");
 
@@ -17,6 +17,9 @@ const main = async () => {
     displayCategories(categories);
     // Afficher les travaux
     displayWorks(works);
+    // filtrer les travaux par catégorie
+    filterManager(works);
+    
     
 }
 

@@ -32,3 +32,23 @@ export function displayCategories(categories){
         filters.appendChild(button);
     });
 };
+export function filterManager(works){
+    const filterBtns = document.querySelectorAll(".filters button");
+
+    filterBtns.forEach(filterBtn => {
+        filterBtn.addEventListener("click", (e) => {
+            console.log("Bouton de filtre cliqué");
+            const categoryId = e.target.dataset.id;
+            e.target.classList.add('active');
+            filterBtns.forEach(btn => {
+                if (btn !== e.target) {
+                    btn.classList.remove('active');
+                }
+            }); 
+            console.log("ID de catégorie sélectionnée :", categoryId);             
+            const filteredWorks = categoryId === "all" ? works : works.filter(work => work.categoryId == parseInt(categoryId));
+            console.log("Travaux filtrés :", filteredWorks);        
+            displayWorks(filteredWorks);
+        });
+    }); 
+};
