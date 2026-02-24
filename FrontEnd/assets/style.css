@@ -59,7 +59,7 @@ header {
 	margin: 50px 0
 }
 section {
-	margin: 50px 0 
+	margin: 50px 95px; 
 }
 
 h1{
@@ -109,18 +109,19 @@ li:hover {
 #introduction {
 	display: flex;
 	align-items: center;
+	justify-content: space-between;
 }
 #introduction figure {
-	flex: 1
+	width: 50%;
 }
 #introduction img {
 	display: block;
-	margin: auto;
-	width: 80%;
+	margin: auto; 
+	width: 100%;
 }
 
 #introduction article {
-	flex: 1
+	width: 42%;
 }
 #introduction h2 {
 	margin-bottom: 1em;
@@ -197,11 +198,6 @@ footer nav ul {
 /* mise en page provisoire */
 * {
 	background-color: #FFFEF8;
-}
-
-#portfolio {
-	margin-left: 95px;
-	margin-right: 95px;
 }
 
 .gallery figcaption {
