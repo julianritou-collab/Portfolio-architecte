@@ -5,7 +5,6 @@ export function displayWorks(works){
     let gallery = document.querySelector('.gallery');
     gallery.innerHTML = '';
     works.forEach(work => {
-        console.log(work.category);
         let figure = document.createElement('figure');
         let img = document.createElement('img');
         img.src = work.imageUrl;
@@ -15,5 +14,21 @@ export function displayWorks(works){
         figure.appendChild(img);
         figure.appendChild(figcaption);
         gallery.appendChild(figure);
+    });
+};
+
+export function displayCategories(categories){
+    let filters = document.querySelector('.filters');
+    filters.innerHTML = '';
+    let firstButton = document.createElement('button');
+    firstButton.textContent = "Tous";
+    firstButton.dataset.id = "all";
+    firstButton.classList.add('active');
+    filters.appendChild(firstButton);
+    categories.forEach(category => {
+        let button = document.createElement('button');
+        button.textContent = category.name;
+        button.dataset.id = category.id;
+        filters.appendChild(button);
     });
 };
