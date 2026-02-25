@@ -147,34 +147,42 @@ li:hover {
 	width: 100%;
 
 }
-#contact {
-	width: 50%;
-margin: auto;
+.form-section {
+	width: 33.3%;
+	margin: auto;
 }
-#contact > * {
+.form-section > * {
 	text-align: center;
 
 }
-#contact h2{
+.form-section h2{
 	margin-bottom: 20px;
 }
-#contact form {
+.form-section p {
+	font-size: 16px;
+    color: #3d3d3d;
+}
+.form-section form {
 	text-align: left;
-	margin-top:30px;
+	/* margin-top:30px; */
 	display: flex;
 	flex-direction: column;
 }
 
-#contact input {
+.form-section input {
 	height: 50px;
 	font-size: 1.2em;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
-#contact label {
-	margin: 2em 0 1em 0;
+.form-section label {
+	margin: 3em 0 0.5em 0;
+    font-size: 14px;
+    font-family: 'Work Sans';
+    font-weight: 500;
+    color: #3d3d3d;
 }
-#contact textarea {
+.form-section textarea {
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
@@ -184,10 +192,12 @@ input[type="submit"]{
 	font-weight: 700;
 	color: white;
 	background-color: #1D6154;
-	margin : 2em auto ;
+	margin : 3em auto ;
 	width: 180px;
 	text-align: center;
 	border-radius: 60px ;
+	font-size: 14px;
+    height: 36px;
 }
 
 footer nav ul {
