@@ -200,6 +200,21 @@ input[type="submit"]{
     height: 36px;
 }
 
+.form-section a {
+	margin-top: -7px;
+	display: block;
+	text-align: center;
+	color: #3d3d3d;
+	font-weight: 500;
+	text-decoration: underline;
+	text-underline-offset: 2px;
+}
+
+#login {
+	padding-top: 50px;
+	padding-bottom: 250px;
+}
+
 footer nav ul {
 	display: flex;
 	justify-content: flex-end;
