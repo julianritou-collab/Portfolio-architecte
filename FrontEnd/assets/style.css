@@ -53,11 +53,36 @@ body {
 	font-family: 'Work Sans' ;
 	font-size: 14px;
 }
+
+.edit-ribbon {
+	display: none;
+	height: 59px;
+	width: 100vw;
+	margin-left: calc(50% - 50vw);
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+	background-color: black;
+	color: white;
+	font-size: 16px;
+	font-family: "Work Sans";
+	font-weight: 400;
+}
+
+.edit-ribbon * {
+	background-color: transparent;
+}
+
 header {
 	display: flex;
 	justify-content: space-between;
 	margin: 50px 0
 }
+
+.logout-link {
+	display: none;
+}
+
 section {
 	margin: 50px 95px; 
 }
