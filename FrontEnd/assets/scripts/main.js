@@ -1,6 +1,7 @@
 //point d'entrée de l'application
 import { getWorks , getCategories} from './api.js'
 import { displayWorks, displayCategories , filterManager } from './works.js'
+import { modalManager } from './modal.js'
 
 console.log("main.js chargé");
 
@@ -24,6 +25,7 @@ const main = async () => {
             logoutManager();
         });
         document.querySelector(".cta-edit-projects").style.display = "flex";
+        modalManager();
     }
     // Récupérer les travaux depuis l'API
     const works = await getWorks();

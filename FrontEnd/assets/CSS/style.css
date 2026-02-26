@@ -267,8 +267,11 @@ footer nav ul {
 }
 
 /* mise en page provisoire */
-* {
+html {
 	background-color: #FFFEF8;
+}
+* {
+	background-color: inherit;
 }
 
 .gallery figcaption {
