@@ -23,6 +23,7 @@ const main = async () => {
             e.preventDefault();
             logoutManager();
         });
+        document.querySelector(".cta-edit-projects").style.display = "flex";
     }
     // Récupérer les travaux depuis l'API
     const works = await getWorks();
