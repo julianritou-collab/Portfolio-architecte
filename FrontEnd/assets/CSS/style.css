@@ -83,6 +83,7 @@ header {
 	display: none;
 }
 
+#introduction,
 section {
 	margin: 50px 95px; 
 }
