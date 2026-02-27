@@ -3,7 +3,7 @@ console.log("works.js chargé");
 
 export function displayWorks(works){
     let gallery = document.querySelector('.gallery');
-    let miniGallery = document.querySelector('.litle-gallery');
+    let miniGallery = document.querySelector('.small-gallery');
     gallery.innerHTML = '';
     miniGallery.innerHTML = '';
     works.forEach(work => {
@@ -17,10 +17,15 @@ export function displayWorks(works){
         figure.appendChild(figcaption);
         gallery.appendChild(figure);
         let miniFigure = document.createElement('figure');
+        miniFigure.classList.add("mini-figure");
         let miniImg = document.createElement('img');
         miniImg.src = work.imageUrl;
         miniImg.alt = work.title;
         miniFigure.appendChild(miniImg);
+        let deleteIcon = document.createElement('i');
+        deleteIcon.classList.add("fa-solid", "fa-trash-can", "delete-icon");
+        deleteIcon.dataset.id = work.id;
+        miniFigure.appendChild(deleteIcon);
         miniGallery.appendChild(miniFigure);
     });
 };
