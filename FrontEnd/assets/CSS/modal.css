@@ -27,6 +27,7 @@
 /* navigation modale */
 .modal-nav ul {
     justify-content: space-between;
+    height: 21px;
 }
 
 .modal-back{
@@ -45,6 +46,7 @@
     display: flex;
     width: 200%;
     overflow: hidden; 
+    transition: all 0.5s;
 }
 
 .left-zone {    

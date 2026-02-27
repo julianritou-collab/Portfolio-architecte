@@ -19,6 +19,7 @@ const openModal = async(e) => {
     modal.querySelector(".modal-close").addEventListener("click", closeModal);
     modal.querySelector(".modal-close").addEventListener("click", closeModal);
     modal.querySelector(".modal-wrapper").addEventListener("click", stopPropagation);
+    sliderManager();
 };
 
 // Fermer la modale
@@ -47,4 +48,17 @@ window.addEventListener("keydown", function(e) {
     if(e.key === "Escape" || e.key === "Esc") 
         closeModal(e);
 });
-    
+// Gérer le slider (Galerie photo <-> Ajout photo) dans la modale
+function sliderManager() {
+    const slider = document.querySelector(".modal-content");
+    const right = document.querySelector('.cta-add-project');
+    const left = document.querySelector('.modal-back');
+    right.addEventListener("click", () => {
+        left.style.display = "block";
+        slider.style.transform = "translateX(-50%)";
+    });
+    left.addEventListener("click", () => {
+        slider.style.transform = "translateX(0)";
+        left.style.display = "none";
+    });
+};
