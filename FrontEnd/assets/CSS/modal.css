@@ -61,14 +61,25 @@
     font-size: 26px;
     font-weight: 400;
     color: black;
-    margin: 20px 0 30px 0;
+    margin: 20px 0 40px 0;
 }
 
 .litle-gallery {
     display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-column-gap: 8px;
+    grid-row-gap: 28px;
     width: 75%;
     height: 430px;
     border-bottom: solid 1px #B3B3B3;
+    overflow-y: auto;
+    align-content: start;
+}
+
+.litle-gallery img {
+    display: block;
+    width: 100%;
+    object-fit: cover;
 }
 
 .cta-add-project{

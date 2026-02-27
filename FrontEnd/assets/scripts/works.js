@@ -3,7 +3,9 @@ console.log("works.js chargé");
 
 export function displayWorks(works){
     let gallery = document.querySelector('.gallery');
+    let miniGallery = document.querySelector('.litle-gallery');
     gallery.innerHTML = '';
+    miniGallery.innerHTML = '';
     works.forEach(work => {
         let figure = document.createElement('figure');
         let img = document.createElement('img');
@@ -14,6 +16,12 @@ export function displayWorks(works){
         figure.appendChild(img);
         figure.appendChild(figcaption);
         gallery.appendChild(figure);
+        let miniFigure = document.createElement('figure');
+        let miniImg = document.createElement('img');
+        miniImg.src = work.imageUrl;
+        miniImg.alt = work.title;
+        miniFigure.appendChild(miniImg);
+        miniGallery.appendChild(miniFigure);
     });
 };
 
