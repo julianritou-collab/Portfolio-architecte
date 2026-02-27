@@ -22,10 +22,15 @@ export function displayWorks(works){
         miniImg.src = work.imageUrl;
         miniImg.alt = work.title;
         miniFigure.appendChild(miniImg);
-        let deleteIcon = document.createElement('i');
-        deleteIcon.classList.add("fa-solid", "fa-trash-can", "delete-icon");
-        deleteIcon.dataset.id = work.id;
-        miniFigure.appendChild(deleteIcon);
+        let deletebutton = document.createElement('button');
+        deletebutton.classList.add("delete-button");
+        deletebutton.dataset.id = work.id;
+        deletebutton.ariaLabel = "Supprimer " + work.title;       
+        let deleteIcon = document.createElement('i')
+        deleteIcon.classList.add("fa-solid", "fa-trash-can");
+        deleteIcon.setAttribute("aria-hidden", "true");
+        deletebutton.appendChild(deleteIcon);
+        miniFigure.appendChild(deletebutton);
         miniGallery.appendChild(miniFigure);
     });
 };

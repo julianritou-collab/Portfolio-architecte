@@ -86,7 +86,8 @@
     object-fit: cover;
 }
 
-.delete-icon {
+.delete-button {
+    border:none;
     position: absolute;
     top: 5px;
     right: 5px;
@@ -95,8 +96,9 @@
     padding: 3.5px 4px 3.5px 4px;
     font-size: 10px;
     border-radius: 2px;
+    
 }
-.delete-icon:hover {
+.delete-button:hover {
     cursor: pointer;
     background: white;
     color: black;
