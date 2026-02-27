@@ -74,15 +74,28 @@
 </footer>
 <div class="modal" aria-hidden="true" role="dialog" aria-labelledby="modal-title" >
 	<div class="modal-wrapper">
-		<a href="#" class="modal-close" aria-label="Fermer la fenêtre modale"><i class="fa-solid fa-xmark"></i></a>
+		<nav class="modal-nav">
+			<ul>
+				<li>
+					<a href="#" class="modal-back" aria-label="retour à la galerie">
+						<i class="fa-solid fa-arrow-left"></i>
+					</a>
+				</li>
+				<li>
+					<a href="#" class="modal-close" aria-label="Fermer la fenêtre modale">
+						<i class="fa-solid fa-xmark"></i>
+					</a>
+				</li>
+			</ul>
+		</nav>
 		<div class="modal-content">
 			<div class="left-zone">
-				<h2 id="modal-title">Galerie photo</h2>
+				<h2 id="modal-title" class="modal-title">Galerie photo</h2>
 				<div class="litle-gallery"></div>
-				<button class="cta-add-project">ajouter un projet</button>
+				<button class="cta-add-project">Ajouter une photo</button>
 			</div>
 			<div class="right-zone">
-				<h2>Ajout photo</h2>
+				<h2 class="modal-title" class="modal-title">Ajout photo</h2>
 				<form action="#" method="post">
 					<!-- <input type="file" name="image" id="image" accept="jpg, png : 4mo max">
 					<label for="title">Titre</label>
