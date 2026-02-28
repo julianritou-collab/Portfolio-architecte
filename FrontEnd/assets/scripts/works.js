@@ -1,40 +1,52 @@
 //works.js : gère l'affichage des travaux
 console.log("works.js chargé");
 
+// Afficher les travaux 
 export function displayWorks(works){
     let gallery = document.querySelector('.gallery');
     let miniGallery = document.querySelector('.small-gallery');
     gallery.innerHTML = '';
     miniGallery.innerHTML = '';
     works.forEach(work => {
-        let figure = document.createElement('figure');
-        let img = document.createElement('img');
-        img.src = work.imageUrl;
-        img.alt = work.title;
-        let figcaption = document.createElement('figcaption');
-        figcaption.textContent = work.title;
-        figure.appendChild(img);
-        figure.appendChild(figcaption);
+        let figure = createFigure(work);
         gallery.appendChild(figure);
-        let miniFigure = document.createElement('figure');
-        miniFigure.classList.add("mini-figure");
-        let miniImg = document.createElement('img');
-        miniImg.src = work.imageUrl;
-        miniImg.alt = work.title;
-        miniFigure.appendChild(miniImg);
-        let deletebutton = document.createElement('button');
-        deletebutton.classList.add("delete-button");
-        deletebutton.dataset.id = work.id;
-        deletebutton.ariaLabel = "Supprimer " + work.title;       
-        let deleteIcon = document.createElement('i')
-        deleteIcon.classList.add("fa-solid", "fa-trash-can");
-        deleteIcon.setAttribute("aria-hidden", "true");
-        deletebutton.appendChild(deleteIcon);
-        miniFigure.appendChild(deletebutton);
+        let miniFigure = createMiniFigure(work);
         miniGallery.appendChild(miniFigure);
     });
 };
-
+// Créer une figure pour un projet dans la galerie principale
+const createFigure = (work) => {
+    let figure = document.createElement('figure');
+    let img = document.createElement('img');
+    img.src = work.imageUrl;
+    img.alt = work.title;
+    let figcaption = document.createElement('figcaption');
+    figcaption.textContent = work.title;
+    figure.appendChild(img);
+    figure.appendChild(figcaption);
+    return figure;
+};
+// Créer une mini-figure supprimable pour un projet dans la galerie de la modale
+const createMiniFigure = (work) => {
+    let miniFigure = document.createElement('figure');
+    miniFigure.classList.add("mini-figure");
+    let miniImg = document.createElement('img');
+    miniImg.src = work.imageUrl;
+    miniImg.alt = work.title;
+    miniFigure.appendChild(miniImg);
+    let deletebutton = document.createElement('button');
+    deletebutton.classList.add("delete-button");
+    deletebutton.dataset.id = work.id;
+    deletebutton.ariaLabel = "Supprimer " + work.title;
+    let deleteIcon = document.createElement('i')
+    deleteIcon.classList.add("fa-solid", "fa-trash-can");
+    deleteIcon.setAttribute("aria-hidden", "true");
+    deletebutton.appendChild(deleteIcon);
+    miniFigure.appendChild(deletebutton);   
+    return miniFigure;
+};
+    
+// Afficher les filtres de catégories de travaux
 export function displayCategories(categories){
     let filters = document.querySelector('.filters');
     filters.innerHTML = '';
@@ -50,6 +62,8 @@ export function displayCategories(categories){
         filters.appendChild(button);
     });
 };
+
+// Gérer le filtrage des travaux par catégorie
 export function filterManager(works){
     const filterBtns = document.querySelectorAll(".filters button");
 
