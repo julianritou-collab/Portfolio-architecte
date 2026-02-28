@@ -47,9 +47,8 @@ table {
 	border-spacing: 0;
 }
 /** end reset css**/
-body {
-	max-width: 1140px;
-	margin:auto;
+body {	
+	width: 100%;
 	font-family: 'Work Sans' ;
 	font-size: 14px;
 }
@@ -57,8 +56,7 @@ body {
 .edit-ribbon {
 	display: none;
 	height: 59px;
-	width: calc(100vw - 15px);
-	margin-left: calc(50% - (50vw - 7px));
+	width: 100%;
 	align-items: center;
 	justify-content: center;
 	gap: 10px;
@@ -73,6 +71,11 @@ body {
 	background-color: transparent;
 }
 
+.main-container {
+	max-width: 1140px;
+	margin:auto;
+}
+
 header {
 	display: flex;
 	justify-content: space-between;
@@ -83,9 +86,14 @@ header {
 	display: none;
 }
 
+main {
+	width: 83.16%;
+	margin: auto;
+}
+
 #introduction,
 section {
-	margin: 50px 95px; 
+	margin: 50px 0; 
 }
 
 h1{
