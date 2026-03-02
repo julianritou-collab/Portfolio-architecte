@@ -64,6 +64,7 @@
     margin: 20px 0 40px 0;
 }
 
+/* galerie d'images miniatures */
 .small-gallery {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
@@ -104,11 +105,12 @@
     color: black;
 }
 
+/* bouton d'ajout de projet */
 .cta-add-project{
     border-radius: 25px;
     font-size: 14px;
     padding: 9px;
-    min-width: 237px;
+    min-width: 37.6%;
     font-family: "Syne";
     border: solid 1px #1D6154;
     background-color: #1D6154;
@@ -127,3 +129,96 @@
     flex-direction: column; 
     align-items: center;
 }
+
+
+/* formulaire d'ajout de projet */
+.add-work-form {
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+}
+
+/* champ de téléchargement d'image */
+.upload-field {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: #E8F1F6;
+    border-radius: 3px;
+    min-height: 169px;
+    margin-bottom: 31px;
+}
+/* icône de téléchargement par défaut */
+.upload-icon {
+    font-size: 70px;
+    color: #B9C5CC;
+    background: transparent;
+}
+/* Label = bouton de téléchargement d'image */
+.upload-button {
+    border-radius: 50px;
+    border: none;
+    padding: 10px 34px;
+    color: #306685;
+    background: #CBD6DC;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.upload-button:hover {
+    cursor: pointer;
+    background: #306685;
+    color: #CBD6DC;
+}
+/* bouton par défaut "choisir fichier" masqué*/
+.image-input {
+    display: none;
+}
+/* info sur le fichier téléchargé */
+.upload-file-info {
+    font-size: 10px;
+    color: #444444;
+    background: transparent;
+}
+/* préview de l'image téléchargée */
+.upload-preview {
+    display: none;
+    width: auto;    
+    max-height: 169px;
+    object-fit: cover;
+}
+/* autres champs du formulaire: titre, catégorie */
+.add-work-form label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #3D3D3D;
+    margin-bottom: 10px;
+}
+
+.add-work-form input[type="text"],
+.add-work-form select {
+    height: 51px;
+    border: none;
+    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+    margin-bottom: 21px;
+    padding: 0 16px;
+    box-sizing: border-box;
+}
+/* séparation entre les champs du formulaire et le bouton d'envoi */
+.separator{
+    border-top: 1px solid #B3B3B3;
+    width: 100%;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+
+}
+/* bouton d'envoi du formulaire presque égal à celui de styles.css */
+.add-work-form input[type="submit"] {
+    border: none;
+    min-width: 56.4%; 
+}
+
+
