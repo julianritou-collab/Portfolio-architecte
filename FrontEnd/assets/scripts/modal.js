@@ -1,14 +1,17 @@
+import { startDeleteWorksManager, stopDeleteWorksManager } from './works.js'
 //modal.js : gère l'affichage de la modale
 let modal=null;
 let previouslyFocusedElement = null;
 
 //point d'entrée gestion de la modale
 export const modalManager = () => {
+    console.log("modalManager() appelé");
     document.querySelector(".cta-edit-projects").addEventListener("click", openModal);
 };
 
 // Ouvrir la modale
 const openModal = async(e) => {
+    console.log("openModal() appelé");
     e.preventDefault();
     // Stocker l'élément actuellement focalisé avant d'ouvrir la modale
     previouslyFocusedElement = document.activeElement;
@@ -24,17 +27,22 @@ const openModal = async(e) => {
     modal.querySelector(".modal-close").addEventListener("click", closeModal);
     // Empêcher la propagation des événements de clic à l'intérieur de la modale
     modal.querySelector(".modal-wrapper").addEventListener("click", stopPropagation);
+    // Lancer la gestion de la suppression des travaux dans la modale
+    startDeleteWorksManager();
     // Gérer le slider (Galerie photo <-> Ajout photo) dans la modale
     sliderManager();
 };
 
 // Fermer la modale
 const closeModal = (e) => {
+    console.log("closeModal() appelé");
     e.preventDefault();
     if(modal === null)
-        return;  
+        return;
+    // Arrêter la gestion de la suppression des travaux dans la modale  
+    stopDeleteWorksManager();
     if (previouslyFocusedElement) {
-        // Rétablir le focus sur l'élément précédemment focalisé avant d'ouvrir la modale
+        // Rétablir le focus sur l'élément précédemment focalisé avant la modale
         previouslyFocusedElement.focus();
     }
     // Rendre la modale inaccessible en utilisant les attributs ARIA  
@@ -67,7 +75,8 @@ function sliderManager() {
         left.style.display = "block";
         slider.style.transform = "translateX(-50%)";
     });
-    left.addEventListener("click", () => {
+    left.addEventListener("click", (e) => {
+        e.preventDefault();
         slider.style.transform = "translateX(0)";
         left.style.display = "none";
     });

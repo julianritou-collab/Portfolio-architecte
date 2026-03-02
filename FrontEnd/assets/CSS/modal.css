@@ -118,6 +118,7 @@
     margin-top: 40px;   
 }
 .cta-add-project:hover {
+    background-color: #0e2f28;
     border-color: #0e2f28;
     cursor:pointer
 }

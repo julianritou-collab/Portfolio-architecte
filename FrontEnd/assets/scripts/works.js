@@ -4,6 +4,7 @@ console.log("works.js chargé");
 
 // Afficher les travaux 
 export function displayWorks(works){
+    console.log("displayWorks() appelé");
     let gallery = document.querySelector('.gallery');
     let miniGallery = document.querySelector('.small-gallery');
     gallery.innerHTML = '';
@@ -49,6 +50,7 @@ const createMiniFigure = (work) => {
     
 // Afficher les filtres de catégories de travaux
 export function displayCategories(categories){
+    console.log("displayCategories() appelé");
     let filters = document.querySelector('.filters');
     filters.innerHTML = '';
     let firstButton = document.createElement('button');
@@ -66,6 +68,7 @@ export function displayCategories(categories){
 
 // Gérer le filtrage des travaux par catégorie
 export function filterManager(works){
+    console.log("filterManager() appelé");
     const filterBtns = document.querySelectorAll(".filters button");
 
     filterBtns.forEach(filterBtn => {
@@ -96,7 +99,7 @@ export function startDeleteWorksManager() {
     });
 };
 // arrêter l'écoute des événements de suppression
-function stopDeleteWorksManager() {
+export function stopDeleteWorksManager() {
     console.log("stopDeleteWorksManager() appelé");
     const deleteButtons = document.querySelectorAll(".delete-button");
     deleteButtons.forEach(button => {
@@ -108,12 +111,17 @@ const deleteWorkAndUpdate = async (id) => {
     console.log("deleteWorkAndUpdate() appelé");
     const deleteResult = await deleteWork(id);  
     if(deleteResult) {
-        // Si la suppression a réussi il faut arrêter les écouteurs d'événements de suppression
-        stopDeleteWorksManager();
-        // puis récupérer les travaux mis à jour depuis l'API
-        const works = await getWorks();
-        displayWorks(works);
-        // et redémarrer les écouteurs d'événements de suppression.
-        startDeleteWorksManager();
+        updateWorks();
     }
+};
+// updateWorks() : fonction pour mettre à jour les travaux après une suppression ou une ajout de travail
+export const updateWorks = async () => {
+    console.log("updateWorks() appelé");
+    // arrêter les écouteurs d'événements de suppression
+    stopDeleteWorksManager();
+    // récupérer les travaux mis à jour depuis l'API
+    const works = await getWorks();
+    displayWorks(works);
+    // redémarrer les écouteurs d'événements de suppression
+    startDeleteWorksManager();
 };

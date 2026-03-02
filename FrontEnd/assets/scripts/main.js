@@ -1,6 +1,6 @@
-
+import { logoutManager } from './login.js'
 import { getWorks , getCategories } from './api.js'
-import { displayWorks, displayCategories , filterManager, startDeleteWorksManager } from './works.js'
+import { displayWorks, displayCategories , filterManager } from './works.js'
 import { modalManager } from './modal.js'
 
 console.log("main.js chargé");
@@ -35,7 +35,6 @@ const main = async () => {
         });
         document.querySelector(".cta-edit-projects").style.display = "flex";
         modalManager();
-        startDeleteWorksManager();
     }
     else {
         // Afficher les catégories dans les filtres
@@ -47,12 +46,5 @@ const main = async () => {
 // Lancer la fonction main pour initialiser la page d'accueil
 main();
 
-// Gérer le logout de l'utilisateur
-const logoutManager = () => {
-    // Supprimer le token et l'id de l'utilisateur du localStorage
-    localStorage.removeItem("token");
-    localStorage.removeItem("userId");
-    // Rediriger vers la page d'accueil
-    window.location.href = "index.html";
-}
+
 
