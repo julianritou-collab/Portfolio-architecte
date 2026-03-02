@@ -190,6 +190,12 @@
     max-height: 169px;
     object-fit: cover;
 }
+/* masquer les éléments de la zone de téléchargement d'image une fois qu'une image a été téléchargée */
+.upload-field.has-image .upload-icon,
+.upload-field.has-image .upload-button,
+.upload-field.has-image .upload-file-info {
+    display: none;
+}
 /* autres champs du formulaire: titre, catégorie */
 .add-work-form label {
     font-size: 14px;
@@ -206,6 +212,10 @@
     margin-bottom: 21px;
     padding: 0 16px;
     box-sizing: border-box;
+    font-family: "Work Sans";
+    font-weight: 400;
+    font-size: 14px;
+    color: #444444;
 }
 /* séparation entre les champs du formulaire et le bouton d'envoi */
 .separator{
@@ -220,6 +230,10 @@
 .add-work-form input[type="submit"] {
     border: none;
     min-width: 56.4%; 
+}
+.add-work-form input[type="submit"][disabled] {
+    background-color: #A7A7A7;
+    cursor: default;
 }
 
 

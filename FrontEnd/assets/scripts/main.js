@@ -6,7 +6,7 @@ import { modalManager } from './modal.js'
 console.log("main.js chargé");
 
 let works = null;
-let categories = null;
+export let categories = null;
 
 // point d'entrée de la page d'accueil
 const main = async () => {

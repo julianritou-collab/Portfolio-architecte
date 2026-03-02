@@ -29,6 +29,8 @@ const openModal = async(e) => {
     modal.querySelector(".modal-wrapper").addEventListener("click", stopPropagation);
     // Lancer la gestion de la suppression des travaux dans la modale
     startDeleteWorksManager();
+    // Initialiser le formulaire d'ajout de travaux dans la modale
+    initAddForm();
     // Gérer le slider (Galerie photo <-> Ajout photo) dans la modale
     sliderManager();
 };
@@ -80,4 +82,90 @@ function sliderManager() {
         slider.style.transform = "translateX(0)";
         left.style.display = "none";
     });
+};
+// Initialiser le formulaire d'ajout de travaux dans la modale
+const initAddForm = () => {
+    console.log("initAddForm() appelé");
+    const form = document.querySelector(".add-work-form");
+    const imageInput = form.querySelector("#image");
+    const titleInput = form.querySelector("#title");
+    const categoryInput = form.querySelector("#category");
+    const submitBtn = form.querySelector(".submit-button");
+    initCategoryOptions(categoryInput);
+    resetForm(form);
+    // Ajouter un écouteur d'événement pour l'input de l'image afin d'afficher un aperçu de l'image sélectionnée
+    imageInput.addEventListener("change", () => {
+        displayImagePreview(form);
+        canSubmitForm(form);
+    });
+    titleInput.addEventListener("input", () => canSubmitForm(form));
+    categoryInput.addEventListener("change", () => canSubmitForm(form));
+};
+
+import { categories } from './main.js'
+// Initialiser les options de catégories dans le formulaire d'ajout de travaux
+const initCategoryOptions = (categoryInput) => {
+    console.log("initCategoryOptions() appelé");
+    categoryInput.innerHTML = "";
+    if(categories === null || categories.length === 0) {
+        return;
+    }
+    categories.forEach(category => {
+        const option = document.createElement("option");
+        option.value = category.id;
+        option.textContent = category.name;
+        categoryInput.appendChild(option);
+    });
+}
+// Réinitialiser le formulaire d'ajout de travaux
+const resetForm = (form) => {
+    const imageInput = form.querySelector("#image");
+    const titleInput = form.querySelector("#title");
+    const categorySelect = form.querySelector("#category");
+    const uploadField = form.querySelector(".upload-field");
+    const uploadPreview = form.querySelector(".upload-preview");
+    const submitBtn = form.querySelector('input[type="submit"]');
+
+    imageInput.value = "";
+    titleInput.value = "";
+    categorySelect.value = "";
+    uploadPreview.src = "";
+    uploadPreview.style.display = "none";
+    uploadField.classList.remove("has-image");
+    submitBtn.disabled = true;
+    submitBtn.value = "Valider";
+}
+
+// Afficher un aperçu de l'image sélectionnée dans le formulaire d'ajout de travaux
+const displayImagePreview = (form) => {
+    const imageInput = form.querySelector("#image");
+    const uploadPreview = form.querySelector(".upload-preview");
+    const uploadField = form.querySelector(".upload-field");
+    if (!imageInput.files || imageInput.files.length === 0) {
+        uploadPreview.src = "";
+        uploadPreview.style.display = "none";
+        uploadField.classList.remove("has-image");
+        return;
+    }
+    const selectedFile = imageInput.files[0];
+    const allowedTypes = ['image/jpg', 'image/jpeg', 'image/png'];
+    const maxSize = 4 * 1024 * 1024;
+
+    if (!allowedTypes.includes(selectedFile.type) || selectedFile.size > maxSize) {
+        imageInput.value = "";
+        uploadPreview.src = "";
+        uploadPreview.style.display = "none";
+        uploadField.classList.remove("has-image");
+        return;
+    }
+    uploadPreview.src = URL.createObjectURL(selectedFile);
+    uploadPreview.style.display = "block";
+    uploadField.classList.add("has-image");
+};
+
+// Vérifier si le formulaire d'ajout de travaux est valide pour activer le bouton de soumission
+const canSubmitForm = (form) => {
+    const submitBtn = form.querySelector('input[type="submit"]');
+    //to do
+    submitBtn.disabled = true;
 };
