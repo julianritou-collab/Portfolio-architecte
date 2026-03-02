@@ -10,15 +10,21 @@ export const modalManager = () => {
 // Ouvrir la modale
 const openModal = async(e) => {
     e.preventDefault();
+    // Stocker l'élément actuellement focalisé avant d'ouvrir la modale
     previouslyFocusedElement = document.activeElement;
+    // Afficher la modale
     modal = document.querySelector(".modal");
     modal.style.display = "flex";
+    // Rendre la modale accessible en utilisant les attributs ARIA
     modal.removeAttribute("aria-hidden");
     modal.setAttribute("aria-modal", "true");
+    // ajouter les écouteurs d'événements pour fermer la modale
     modal.addEventListener("click", closeModal);
     modal.querySelector(".modal-close").addEventListener("click", closeModal);
     modal.querySelector(".modal-close").addEventListener("click", closeModal);
+    // Empêcher la propagation des événements de clic à l'intérieur de la modale
     modal.querySelector(".modal-wrapper").addEventListener("click", stopPropagation);
+    // Gérer le slider (Galerie photo <-> Ajout photo) dans la modale
     sliderManager();
 };
 
@@ -28,13 +34,17 @@ const closeModal = (e) => {
     if(modal === null)
         return;  
     if (previouslyFocusedElement) {
+        // Rétablir le focus sur l'élément précédemment focalisé avant d'ouvrir la modale
         previouslyFocusedElement.focus();
-    }  
+    }
+    // Rendre la modale inaccessible en utilisant les attributs ARIA  
     modal.setAttribute("aria-hidden", "true");
     modal.removeAttribute("aria-modal");
+    // Supprimer les écouteurs d'événements pour fermer la modale
     modal.removeEventListener("click", closeModal);
     modal.querySelector(".modal-close").removeEventListener("click", closeModal);
     modal.querySelector(".modal-wrapper").removeEventListener("click", stopPropagation);
+    // Cacher la modale
     modal.style.display = "none";
     modal = null;
 };

@@ -1,3 +1,4 @@
+import { getWorks , deleteWork } from './api.js'
 //works.js : gère l'affichage des travaux
 console.log("works.js chargé");
 
@@ -83,4 +84,36 @@ export function filterManager(works){
             displayWorks(filteredWorks);
         });
     }); 
+};
+// Gérer la suppression des travaux dans la modale
+
+// demarrer l'ecoute des événements de suppression
+export function startDeleteWorksManager() {
+    console.log("startDeleteWorksManager() appelé");
+    const deleteButtons = document.querySelectorAll(".delete-button");
+    deleteButtons.forEach(button => {
+        button.addEventListener("click", () => deleteWorkAndUpdate(button.dataset.id));
+    });
+};
+// arrêter l'écoute des événements de suppression
+function stopDeleteWorksManager() {
+    console.log("stopDeleteWorksManager() appelé");
+    const deleteButtons = document.querySelectorAll(".delete-button");
+    deleteButtons.forEach(button => {
+        button.removeEventListener("click", () => deleteWorkAndUpdate(button.dataset.id));
+    });
+}
+// Supprimer un travail et mettre à jour l'affichage
+const deleteWorkAndUpdate = async (id) => {
+    console.log("deleteWorkAndUpdate() appelé");
+    const deleteResult = await deleteWork(id);  
+    if(deleteResult) {
+        // Si la suppression a réussi il faut arrêter les écouteurs d'événements de suppression
+        stopDeleteWorksManager();
+        // puis récupérer les travaux mis à jour depuis l'API
+        const works = await getWorks();
+        displayWorks(works);
+        // et redémarrer les écouteurs d'événements de suppression.
+        startDeleteWorksManager();
+    }
 };

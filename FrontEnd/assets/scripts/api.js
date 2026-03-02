@@ -1,6 +1,7 @@
 //api.js : gère les appels à l'API 
 console.log("api.js chargé");
 
+// Récupérer les catégories depuis l'API
 export const getCategories = async () => {
     try {
         const response = await fetch('http://localhost:5678/api/categories');       
@@ -15,6 +16,7 @@ export const getCategories = async () => {
     }
 };  
 
+// Récupérer les travaux depuis l'API
 export const getWorks = async () => {
     try {
         const response = await fetch('http://localhost:5678/api/works');
@@ -29,6 +31,7 @@ export const getWorks = async () => {
     }
 };
 
+// login de l'utilisateur
 export const login = async (email, password) => {
     try {
         const sendData = {
@@ -52,3 +55,25 @@ export const login = async (email, password) => {
         return null;
     }
 };  
+
+// Supprimer un travail 
+export const deleteWork = async (id) => {
+    const token = localStorage.getItem("token");
+    try {
+        const response = await fetch(`http://localhost:5678/api/works/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        if (response.ok) {
+            console.log(`Travail avec l'ID ${id} supprimé avec succès.`);
+            return true;
+        } else {
+            console.error(`Erreur lors de la suppression du travail avec l'ID ${id}.`);
+        }
+    } catch (error) {
+        console.error(`Erreur lors de la suppression du travail avec l'ID ${id}:`, error);
+    }
+    return false;
+};

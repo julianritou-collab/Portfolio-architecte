@@ -1,45 +1,58 @@
-//point d'entrée de l'application
-import { getWorks , getCategories} from './api.js'
-import { displayWorks, displayCategories , filterManager } from './works.js'
+
+import { getWorks , getCategories } from './api.js'
+import { displayWorks, displayCategories , filterManager, startDeleteWorksManager } from './works.js'
 import { modalManager } from './modal.js'
 
 console.log("main.js chargé");
 
-const logoutManager = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("userId");
-    window.location.href = "index.html";
-}
+let works = null;
+let categories = null;
 
+// point d'entrée de la page d'accueil
 const main = async () => {
     console.log("main() appelé");
+    // Récupérer les travaux depuis l'API
+    works = await getWorks();
+    console.log(works);
+    // Récupérer les catégories depuis l'API
+    categories = await getCategories();
+    console.log(categories);
+    // Afficher les travaux
+    displayWorks(works);
     // Vérifier si l'utilisateur est connecté
     let modeEdit = localStorage.getItem("token") ? true : false;
     // Afficher le mode édition si l'utilisateur est connecté
     if(modeEdit) {
+        // afficher le ruban d'édition
         document.querySelector(".edit-ribbon").style.display = "flex";
+        // caher le lien de login et afficher le lien de logout
         document.querySelector(".login-link").style.display = "none";
         document.querySelector(".logout-link").style.display = "block";
+        // ajouter un écouteur d'événement pour le lien de logout
         document.querySelector(".cta-logout").addEventListener("click", (e) => {
             e.preventDefault();
             logoutManager();
         });
         document.querySelector(".cta-edit-projects").style.display = "flex";
         modalManager();
+        startDeleteWorksManager();
     }
-    // Récupérer les travaux depuis l'API
-    const works = await getWorks();
-    console.log(works);
-    // Récupérer les catégories depuis l'API
-    const categories = await getCategories();
-    console.log(categories);
-    // Afficher les catégories si l'utilisateur n'est pas connecté
-    if(!modeEdit) 
+    else {
+        // Afficher les catégories dans les filtres
         displayCategories(categories);
-    // Afficher les travaux
-    displayWorks(works);
-    // filtrer les travaux par catégorie
-    filterManager(works);  
+        filterManager(works);
+    }     
 }
 
+// Lancer la fonction main pour initialiser la page d'accueil
 main();
+
+// Gérer le logout de l'utilisateur
+const logoutManager = () => {
+    // Supprimer le token et l'id de l'utilisateur du localStorage
+    localStorage.removeItem("token");
+    localStorage.removeItem("userId");
+    // Rediriger vers la page d'accueil
+    window.location.href = "index.html";
+}
+
