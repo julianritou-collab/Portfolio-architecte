@@ -99,7 +99,10 @@
 						<h2 class="modal-title" class="modal-title">Ajout photo</h2>
 						<form class="add-work-form" action="#" method="post">
 							<div class="upload-field">
-								<img class="upload-preview" src="" alt="Aperçu de l'image sélectionnée">
+								<a href="#" class="delete-image" aria-label="supprimer l'image sélectionnée">
+									<img class="upload-preview" src="" alt="Aperçu de l'image sélectionnée">
+									<span class="delete-tooltip"><i class="fa-solid fa-xmark"></i></span>
+								</a>
 								<i class="fa-regular fa-image upload-icon" aria-hidden="true"></i>
 								<label for="image" class="upload-button">+ Ajouter photo</label>
 								<input class="image-input" type="file" name="image" id="image" accept="image/jpg,image/jpeg,image/png">

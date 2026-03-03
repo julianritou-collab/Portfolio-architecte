@@ -88,6 +88,7 @@ const initAddForm = () => {
     console.log("initAddForm() appelé");
     const form = document.querySelector(".add-work-form");
     const imageInput = form.querySelector("#image");
+    const deleteImageBtn = form.querySelector(".delete-image");
     const titleInput = form.querySelector("#title");
     const categoryInput = form.querySelector("#category");
     const submitBtn = form.querySelector(".submit-button");
@@ -98,8 +99,17 @@ const initAddForm = () => {
         displayImagePreview(form);
         canSubmitForm(form);
     });
+     //Ajouter un écouteur d'événement pour le bouton de suppression de l'image afin de réinitialiser le champ de l'image et masquer l'aperçu de l'image
+    deleteImageBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        imageInput.value = "";
+        displayImagePreview(form);
+        canSubmitForm(form);
+    });
+    // Ajouter des écouteurs d'événements pour les autres champs du formulaire afin de vérifier si le formulaire est valide pour activer le bouton de soumission
     titleInput.addEventListener("input", () => canSubmitForm(form));
     categoryInput.addEventListener("change", () => canSubmitForm(form));
+   
 };
 
 import { categories } from './main.js'
