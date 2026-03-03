@@ -1,4 +1,5 @@
-import { startDeleteWorksManager, stopDeleteWorksManager } from './works.js'
+import { startDeleteWorksManager, stopDeleteWorksManager, updateWorks } from './works.js'
+import { submitWork } from './api.js'
 //modal.js : gère l'affichage de la modale
 let modal=null;
 let previouslyFocusedElement = null;
@@ -109,7 +110,14 @@ const initAddForm = () => {
     // Ajouter des écouteurs d'événements pour les autres champs du formulaire afin de vérifier si le formulaire est valide pour activer le bouton de soumission
     titleInput.addEventListener("input", () => canSubmitForm(form));
     categoryInput.addEventListener("change", () => canSubmitForm(form));
-   
+
+    // Ajouter un écouteur d'événement pour la soumission du formulaire d'ajout de travaux
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        if(!isFormValid(form))
+            return;
+        await doSubmitForm(form);
+    });
 };
 
 import { categories } from './main.js'
@@ -174,8 +182,37 @@ const displayImagePreview = (form) => {
 };
 
 // Vérifier si le formulaire d'ajout de travaux est valide pour activer le bouton de soumission
+const isFormValid = (form) => {
+    const imageInput = form.querySelector("#image");
+    const titleInput = form.querySelector("#title");
+    const categorySelect = form.querySelector("#category");
+
+    return imageInput.files &&imageInput.files.length > 0 && titleInput.value.trim() !== "" && categorySelect.value !== "";
+};
+
+// Vérifier si le formulaire d'ajout de travaux est valide pour activer le bouton de soumission
 const canSubmitForm = (form) => {
     const submitBtn = form.querySelector('input[type="submit"]');
-    //to do
-    submitBtn.disabled = true;
+    // Le formulaire est considéré comme valide si une image est sélectionnée, que le champ de titre n'est pas vide et qu'une catégorie est sélectionnée
+    submitBtn.disabled = !isFormValid(form);
 };
+
+// Gérer la soumission du formulaire d'ajout de travaux
+const doSubmitForm = async (form) => {
+    // Récupérer les données du formulaire
+    const imageInput = form.querySelector("#image");
+    const titleInput = form.querySelector("#title");
+    const categorySelect = form.querySelector("#category");
+
+    const formData = new FormData();
+    formData.append("image", imageInput.files[0]);
+    formData.append("title", titleInput.value.trim());
+    formData.append("category", categorySelect.value);
+    // Envoyer les données à l'API pour ajouter le travail
+    const response = await submitWork(formData);
+    if(response) {
+        // Si l'ajout a réussi, réinitialiser le formulaire et mettre à jour les travaux affichés dans la modale
+        resetForm(form);
+        updateWorks();
+    }
+}

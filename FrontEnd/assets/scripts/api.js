@@ -77,3 +77,25 @@ export const deleteWork = async (id) => {
     }
     return false;
 };
+
+// Ajouter un travail
+export const submitWork = async (formData) => {
+    const token = localStorage.getItem("token");
+    try {
+        const response = await fetch('http://localhost:5678/api/works', {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            },
+            body: formData
+        });
+        if (!response.ok) {
+            throw new Error('Erreur lors de l\'ajout du travail');
+        }
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error(error);
+        return null;
+    }
+};
