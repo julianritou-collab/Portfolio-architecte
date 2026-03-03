@@ -3,6 +3,7 @@ import { submitWork } from './api.js'
 //modal.js : gère l'affichage de la modale
 let modal=null;
 let previouslyFocusedElement = null;
+let addEventInitialized = false;
 
 //point d'entrée gestion de la modale
 export const modalManager = () => {
@@ -92,9 +93,12 @@ const initAddForm = () => {
     const deleteImageBtn = form.querySelector(".delete-image");
     const titleInput = form.querySelector("#title");
     const categoryInput = form.querySelector("#category");
-    const submitBtn = form.querySelector(".submit-button");
     initCategoryOptions(categoryInput);
     resetForm(form);
+
+    if(addEventInitialized)
+        return;
+    console.log("Initialisation des événements du formulaire d'ajout de travaux");
     // Ajouter un écouteur d'événement pour l'input de l'image afin d'afficher un aperçu de l'image sélectionnée
     imageInput.addEventListener("change", () => {
         displayImagePreview(form);
@@ -114,10 +118,9 @@ const initAddForm = () => {
     // Ajouter un écouteur d'événement pour la soumission du formulaire d'ajout de travaux
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
-        if(!isFormValid(form))
-            return;
         await doSubmitForm(form);
     });
+    addEventInitialized = true;
 };
 
 import { categories } from './main.js'
@@ -137,6 +140,7 @@ const initCategoryOptions = (categoryInput) => {
 }
 // Réinitialiser le formulaire d'ajout de travaux
 const resetForm = (form) => {
+    console.log("resetForm() appelé");
     const imageInput = form.querySelector("#image");
     const titleInput = form.querySelector("#title");
     const categorySelect = form.querySelector("#category");
@@ -156,6 +160,7 @@ const resetForm = (form) => {
 
 // Afficher un aperçu de l'image sélectionnée dans le formulaire d'ajout de travaux
 const displayImagePreview = (form) => {
+    console.log("displayImagePreview() appelé");
     const imageInput = form.querySelector("#image");
     const uploadPreview = form.querySelector(".upload-preview");
     const uploadField = form.querySelector(".upload-field");
@@ -183,6 +188,7 @@ const displayImagePreview = (form) => {
 
 // Vérifier si le formulaire d'ajout de travaux est valide pour activer le bouton de soumission
 const isFormValid = (form) => {
+    console.log("isFormValid() appelé");
     const imageInput = form.querySelector("#image");
     const titleInput = form.querySelector("#title");
     const categorySelect = form.querySelector("#category");
@@ -199,6 +205,7 @@ const canSubmitForm = (form) => {
 
 // Gérer la soumission du formulaire d'ajout de travaux
 const doSubmitForm = async (form) => {
+    console.log("doSubmitForm() appelé");
     // Récupérer les données du formulaire
     const imageInput = form.querySelector("#image");
     const titleInput = form.querySelector("#title");
