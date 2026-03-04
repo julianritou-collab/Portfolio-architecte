@@ -13,6 +13,14 @@ form.addEventListener("submit", (event) => {
 const doLogin = async () => {
     console.log("doLogin() appelé");
     let email = document.querySelector("#email").value;
+    let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        console.error("Format d'email invalide");
+        alert("Format d'email invalide");
+        document.querySelector("#email").value = "";
+        document.querySelector("#password").value = "";  
+        return;
+    }
     let password = document.querySelector("#password").value; 
     const loginResult = await login(email, password);
     if(loginResult) {
