@@ -1,6 +1,5 @@
 import { getWorks , deleteWork } from './api.js'
 //works.js : gère l'affichage des travaux
-console.log("works.js chargé");
 
 // Afficher les travaux 
 export function displayWorks(works){

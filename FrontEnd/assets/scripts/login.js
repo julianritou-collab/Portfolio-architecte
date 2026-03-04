@@ -1,18 +1,17 @@
-//login.js : gère le login de l'utilisateur 
+//login.js : gère le login/logout de l'utilisateur 
 import { login } from './api.js'
 
-console.log("login.js chargé");
 
 let form = document.querySelector("form")
 
 form.addEventListener("submit", (event) => {
     event.preventDefault()
-    loginManager();
+    doLogin();
 });
 
 // Gérer le login de l'utilisateur
-const loginManager = async () => {
-    console.log("loginManager() appelé");
+const doLogin = async () => {
+    console.log("doLogin() appelé");
     let email = document.querySelector("#email").value;
     let password = document.querySelector("#password").value; 
     const loginResult = await login(email, password);
@@ -22,15 +21,14 @@ const loginManager = async () => {
         localStorage.setItem("userId", loginResult.userId);
         // puis rediriger vers la page d'accueil
         window.location.href = "index.html";
-    } else {
-        alert("Identifiant ou mot de passe incorrect");
     } 
     document.querySelector("#email").value = "";
     document.querySelector("#password").value = "";  
 };
 
 // Gérer le logout de l'utilisateur
-export const logoutManager = () => {
+export const doLogout = () => {
+    console.log("doLogout() appelé");
     // Supprimer le token et l'id de l'utilisateur du localStorage
     localStorage.removeItem("token");
     localStorage.removeItem("userId");
