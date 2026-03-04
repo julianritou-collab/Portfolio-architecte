@@ -2,12 +2,15 @@
 import { login } from './api.js'
 
 
-let form = document.querySelector("form")
+let form = document.querySelector("#login-form")
 
-form.addEventListener("submit", (event) => {
-    event.preventDefault()
-    doLogin();
-});
+if(form) {
+    form.addEventListener("submit", (event) => {
+        event.preventDefault()
+        doLogin();
+    });
+}
+
 
 // Gérer le login de l'utilisateur
 const doLogin = async () => {
