@@ -151,7 +151,7 @@ const resetForm = (form) => {
     imageInput.value = "";
     titleInput.value = "";
     categorySelect.value = "";
-    uploadPreview.src = "";
+    uploadPreview.src = './assets/images/placeholder.jpeg';
     uploadPreview.style.display = "none";
     uploadField.classList.remove("has-image");
     submitBtn.disabled = true;
@@ -165,7 +165,7 @@ const displayImagePreview = (form) => {
     const uploadPreview = form.querySelector(".upload-preview");
     const uploadField = form.querySelector(".upload-field");
     if (!imageInput.files || imageInput.files.length === 0) {
-        uploadPreview.src = "";
+        uploadPreview.src = './assets/images/placeholder.jpeg';
         uploadPreview.style.display = "none";
         uploadField.classList.remove("has-image");
         return;
@@ -176,7 +176,7 @@ const displayImagePreview = (form) => {
 
     if (!allowedTypes.includes(selectedFile.type) || selectedFile.size > maxSize) {
         imageInput.value = "";
-        uploadPreview.src = "";
+        uploadPreview.src = './assets/images/placeholder.jpeg';
         uploadPreview.style.display = "none";
         uploadField.classList.remove("has-image");
         return;
