@@ -4,6 +4,7 @@ import { submitWork } from './api.js'
 let modal=null;
 let previouslyFocusedElement = null;
 let addEventInitialized = false;
+let sliderInitialized = false;
 
 //point d'entrée gestion de la modale
 export const modalManager = () => {
@@ -26,7 +27,6 @@ const openModal = async(e) => {
     // ajouter les écouteurs d'événements pour fermer la modale
     modal.addEventListener("click", closeModal);
     modal.querySelector(".modal-close").addEventListener("click", closeModal);
-    modal.querySelector(".modal-close").addEventListener("click", closeModal);
     // Empêcher la propagation des événements de clic à l'intérieur de la modale
     modal.querySelector(".modal-wrapper").addEventListener("click", stopPropagation);
     // Lancer la gestion de la suppression des travaux dans la modale
@@ -34,7 +34,10 @@ const openModal = async(e) => {
     // Initialiser le formulaire d'ajout de travaux dans la modale
     initAddForm();
     // Gérer le slider (Galerie photo <-> Ajout photo) dans la modale
-    sliderManager();
+    if(!sliderInitialized) {
+        sliderManager();
+        sliderInitialized = true;
+    };
 };
 
 // Fermer la modale
@@ -72,14 +75,17 @@ window.addEventListener("keydown", function(e) {
 });
 // Gérer le slider (Galerie photo <-> Ajout photo) dans la modale
 function sliderManager() {
+    console.log("sliderManager() appelé");
     const slider = document.querySelector(".modal-content");
     const right = document.querySelector('.cta-add-project');
     const left = document.querySelector('.modal-back');
     right.addEventListener("click", () => {
+        console.log("aller vers le formulaire d'ajout de travaux");
         left.style.display = "block";
         slider.style.transform = "translateX(-50%)";
     });
     left.addEventListener("click", (e) => {
+        console.log("retour à la galerie photo");
         e.preventDefault();
         slider.style.transform = "translateX(0)";
         left.style.display = "none";
