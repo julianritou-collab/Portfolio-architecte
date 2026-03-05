@@ -89,25 +89,47 @@ export function filterManager(works){
 };
 // Gérer la suppression des travaux dans la modale
 
+let deleteButtons = [];
+let handlers = new Map();
+
 // demarrer l'ecoute des événements de suppression
 export function startDeleteWorksManager() {
     console.log("startDeleteWorksManager() appelé");
-    const deleteButtons = document.querySelectorAll(".delete-button");
+
+    if (deleteButtons.length > 0) {
+        console.log("deleteButtons déjà initialisé");
+        return;
+    }
+
+    deleteButtons = document.querySelectorAll(".delete-button");
+
     deleteButtons.forEach(button => {
-        button.addEventListener("click", () => deleteWorkAndUpdate(button.dataset.id));
+        const handler = () => deleteWorkAndUpdate(button.dataset.id);
+
+        handlers.set(button, handler);
+        button.addEventListener("click", handler);
     });
-};
+}
 // arrêter l'écoute des événements de suppression
 export function stopDeleteWorksManager() {
     console.log("stopDeleteWorksManager() appelé");
-    const deleteButtons = document.querySelectorAll(".delete-button");
+
+    if (deleteButtons.length === 0) {
+        console.log("deleteButtons non initialisé");
+        return;
+    }
+
     deleteButtons.forEach(button => {
-        button.removeEventListener("click", () => deleteWorkAndUpdate(button.dataset.id));
+        const handler = handlers.get(button);
+        button.removeEventListener("click", handler);
     });
+
+    handlers.clear();
+    deleteButtons = [];
 }
 // Supprimer un travail et mettre à jour l'affichage
 const deleteWorkAndUpdate = async (id) => {
-    console.log("deleteWorkAndUpdate() appelé");
+    console.log("deleteWorkAndUpdate() appelé avec id :", id);
     const deleteResult = await deleteWork(id);  
     if(deleteResult) {
         updateWorks();
