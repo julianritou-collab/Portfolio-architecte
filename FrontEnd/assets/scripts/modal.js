@@ -171,8 +171,7 @@ const displayImagePreview = (form) => {
     const uploadPreview = form.querySelector(".upload-preview");
     const uploadField = form.querySelector(".upload-field");
     if (!imageInput.files || imageInput.files.length === 0) {
-        console.error("Aucun fichier sélectionné");
-        alert("Aucun fichier sélectionné.\nVeuillez sélectionner une image au format JPG, JPEG ou PNG de moins de 4 Mo.");
+        console.log("Aucun fichier sélectionné");
         uploadPreview.src = './assets/images/placeholder.jpeg';
         uploadPreview.style.display = "none";
         uploadField.classList.remove("has-image");
