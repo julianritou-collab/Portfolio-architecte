@@ -1,5 +1,6 @@
 /* fenêtre modale */
 .modal {
+    margin-top: 0;
     position: fixed;
     display: none;
     align-items: center;
@@ -86,6 +87,15 @@
     display: block;
     width: 100%;
     object-fit: cover;
+}
+
+.no-border {
+    border: none;
+    background: transparent;
+    padding: 0;
+}
+.no-border:hover {
+    cursor: pointer;
 }
 
 .delete-button {

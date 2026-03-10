@@ -14,14 +14,14 @@
 	<script type="module" src="./assets/scripts/main.js"></script>
 </head>
 <body>
-	<div class="edit-ribbon">
+	<aside class="edit-ribbon">
 		<i class="fa-regular fa-pen-to-square"></i>
 		<span>Mode édition</span>
-	</div>
+	</aside>
 	<div class="main-container">
 		<header>
 			<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
-			<nav>
+			<nav aria-label="Navigation principale">
 				<ul>
 					<li><a href="#portfolio">projets</a></li>
 					<li><a href="#contact">contact</a></li>
@@ -34,7 +34,7 @@
 		<main>
 			<div id="introduction">
 				<figure>
-					<img src="./assets/images/sophie-bluel.png" alt="">
+					<img src="./assets/images/sophie-bluel.png" alt="autoportrait de Sophie Bluel">
 				</figure>
 				<article>
 					<h2>Designer d'espace</h2>
@@ -45,10 +45,10 @@
 			</div>
 			<section id="portfolio">
 				<h2>Mes projets</h2>
-				<a href="#" class="cta-edit-projects">
+				<button type="button" class="cta-edit-projects">
 					<i class="fa-regular fa-pen-to-square"></i>
 					<span>modifier</span>
-				</a> 
+				</button> 
 				<div class="filters"></div>
 				<div class="gallery"></div>
 			</section>
@@ -67,25 +67,25 @@
 			</section>
 		</main>
 		<footer>
-			<nav>
+			<nav aria-label="Navigation du pied de page">
 				<ul>
 					<li>Mentions Légales</li>
 				</ul>
 			</nav>
 		</footer>
-		<div class="modal" aria-hidden="true" role="dialog" aria-labelledby="modal-title" >
+		<section class="modal" aria-hidden="true" role="dialog" aria-labelledby="modal-title" >
 			<div class="modal-wrapper">
-				<nav class="modal-nav">
+				<nav class="modal-nav" aria-label="Navigation de la fenêtre modale">
 					<ul>
 						<li>
-							<a href="#" class="modal-back" aria-label="retour à la galerie">
+							<button class="modal-back no-border" aria-label="retour à la galerie">
 								<i class="fa-solid fa-arrow-left"></i>
-							</a>
+							</button>
 						</li>
 						<li>
-							<a href="#" class="modal-close" aria-label="Fermer la fenêtre modale">
+							<button class="modal-close no-border" aria-label="Fermer la fenêtre modale">
 								<i class="fa-solid fa-xmark"></i>
-							</a>
+							</button>
 						</li>
 					</ul>
 				</nav>
@@ -99,10 +99,10 @@
 						<h2 class="modal-title">Ajout photo</h2>
 						<form class="add-work-form" action="#" method="post">
 							<div class="upload-field">
-								<a href="#" class="delete-image" aria-label="supprimer l'image sélectionnée">
+								<button type="button" class="delete-image no-border" aria-label="supprimer l'image sélectionnée">
 									<img class="upload-preview" src="./assets/images/placeholder.jpeg" alt="Aperçu de l'image sélectionnée">
 									<span class="delete-tooltip"><i class="fa-solid fa-xmark"></i></span>
-								</a>
+								</button>
 								<i class="fa-regular fa-image upload-icon" aria-hidden="true"></i>
 								<label for="image" class="upload-button">+ Ajouter photo</label>
 								<input class="image-input" type="file" name="image" id="image" accept="image/jpg,image/jpeg,image/png">
@@ -121,7 +121,7 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</section>
 	</div>
 </body>
 </html>

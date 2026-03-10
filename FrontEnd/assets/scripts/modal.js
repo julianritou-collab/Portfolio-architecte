@@ -1,5 +1,6 @@
 import { startDeleteWorksManager, stopDeleteWorksManager, updateWorks } from './works.js'
 import { submitWork } from './api.js'
+import { categories } from './main.js'
 //modal.js : gère l'affichage de la modale
 let modal=null;
 let previouslyFocusedElement = null;
@@ -129,7 +130,6 @@ const initAddForm = () => {
     addEventInitialized = true;
 };
 
-import { categories } from './main.js'
 // Initialiser les options de catégories dans le formulaire d'ajout de travaux
 const initCategoryOptions = (categoryInput) => {
     console.log("initCategoryOptions() appelé");

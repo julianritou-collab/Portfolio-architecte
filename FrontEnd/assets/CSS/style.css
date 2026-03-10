@@ -177,11 +177,17 @@ li:hover {
 
 .cta-edit-projects {
 	position: absolute;
+	border: none;
+    background: transparent;
+    padding: 0;
     left: calc(50% + 120px);
     top: 11px;
     display: none;
     align-items: center;
     gap: 8px;
+}
+.cta-edit-projects:hover {
+	cursor: pointer;
 }
 
 .gallery {
