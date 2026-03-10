@@ -16,17 +16,20 @@ if(form) {
 const doLogin = async () => {
     console.log("doLogin() appelé");
     let email = document.querySelector("#email").value;
+    let error = document.querySelector("#login-error");
+    error.textContent = "";
     let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-        console.error("Format d'email invalide");
-        alert("Format d'email invalide");
+        error.textContent = "Format d'E-mail invalide !";
         document.querySelector("#email").value = "";
         document.querySelector("#password").value = "";  
         return;
     }
     let password = document.querySelector("#password").value; 
     const loginResult = await login(email, password);
-    if(loginResult) {
+    if(loginResult.error) {
+        error.textContent = loginResult.error;
+    } else {
         // Si le login a réussi, stocker le token et l'id de l'utilisateur dans le localStorage
         localStorage.setItem("token", loginResult.token);
         localStorage.setItem("userId", loginResult.userId);

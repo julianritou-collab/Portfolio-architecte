@@ -213,7 +213,7 @@ li:hover {
 .form-section h2{
 	margin-bottom: 20px;
 }
-.form-section p {
+#contact p {
 	font-size: 16px;
     color: #3d3d3d;
 }
@@ -247,12 +247,24 @@ li:hover {
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
+.form-error {
+	color: #dd1a1a;
+}
+
+#login-error {
+	font-size: 16px;
+	font-weight: 700;
+	min-height: 50px;
+	text-align: center;
+	margin-top: 20px;
+}
+
 input[type="submit"]{
 	font-family: 'Syne';
 	font-weight: 700;
 	color: white;
 	background-color: #1D6154;
-	margin : 3em auto ;
+	margin : 3em auto;
 	width: 180px;
 	text-align: center;
 	border-radius: 60px ;
@@ -277,7 +289,7 @@ input[type="submit"]:hover {
 
 #login {
 	padding-top: 50px;
-	padding-bottom: 250px;
+	padding-bottom: 180px;
 }
 
 footer nav ul {

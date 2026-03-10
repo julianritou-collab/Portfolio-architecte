@@ -51,20 +51,22 @@ export const login = async (email, password) => {
             body: JSON.stringify(sendData)
         });
         if (response.status === 401 || response.status === 404) {
-            console.error('Erreur dans l’identifiant ou le mot de passe');
-            alert('Erreur dans l’identifiant ou le mot de passe');
-            return null;
+            const error = new Error('Identifiant ou mot de passe incorrect !');
+            console.log(error);
+            return { error: error.message };
         }
         else if (!response.ok) {
-            throw new Error("Une erreur est survenue lors de la connexion. Veuillez réessayer plus tard.");
+            const error = new Error("Une erreur est survenue lors de la connexion. Veuillez réessayer plus tard !");
+            console.log(error);
+            return { error: error.message };
         }
         const data = await response.json();
         console.log("Utilisateur connecté :", data);
         return data;
     } catch (error) {   
-        console.error(error);     
-        alert("Une erreur est survenue lors de la connexion.\n Veuillez réessayer plus tard.");
-        return null;
+        console.log(error);  
+        const message = 'Une erreur est survenue lors de la connexion. Veuillez réessayer plus tard !'; 
+        return { error: message };
     }
 };  
 
