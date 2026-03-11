@@ -259,6 +259,7 @@ li:hover {
 	margin-top: 20px;
 }
 
+#remove-work-error,
 #add-work-error {
 	font-size: 14px;
 	font-weight: 600;
@@ -266,6 +267,7 @@ li:hover {
 	text-align: center;
 	margin-top: -30px;
 }
+
 
 input[type="submit"]{
 	font-family: 'Syne';

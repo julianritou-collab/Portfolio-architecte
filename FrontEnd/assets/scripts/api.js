@@ -85,22 +85,23 @@ export const deleteWork = async (id) => {
             console.log(`Travail avec l'ID ${id} supprimé avec succès.`);
             return true;
         } else if (response.status === 401) {
-            console.error(`Non autorisé à supprimer le travail avec l'ID ${id}.`);
-            alert(`Non autorisé à supprimer le travail avec l'ID ${id}.`);
-            return false;
+            const error = new Error(`Non autorisé à supprimer le travail ID ${id}. Veuillez vous reconnecter et réessayer !`);
+            console.log(error);
+            return { error: error.message };
         } else if (response.status === 500) {
-            console.error(`Erreur innattendue lors de la suppression du travail avec l'ID ${id}.`);
-            alert(`Erreur innattendue lors de la suppression du travail avec l'ID ${id}.`);
-            return false;     
-        }
-        else {
-            throw new Error(`Erreur lors de la suppression du travail avec l'ID ${id}`);
+            const error = new Error(`Erreur innattendue lors de la suppression du travail ID ${id}. Veuillez réessayer plus tard !`);
+            console.log(error);
+            return { error: error.message };
+        } else {
+            const error = new Error(`Erreur lors de la suppression du travail ID ${id}. Veuillez réessayer plus tard !`);
+            console.log(error);
+            return { error: error.message };
         }
     } catch (error) {
-        console.error(`Erreur lors de la suppression du travail avec l'ID ${id}:`, error);
-        alert(`Erreur lors de la suppression du travail avec l'ID ${id}.\n Veuillez réessayer plus tard.`);
-    }
-    return false;
+        console.log(error);  
+        const message = `Erreur lors de la suppression du travail ID ${id}. Veuillez réessayer plus tard !`;
+        return { error: message };
+    }     
 };
 
 // Ajouter un travail

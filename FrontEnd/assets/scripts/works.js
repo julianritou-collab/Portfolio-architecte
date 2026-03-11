@@ -96,6 +96,8 @@ let handlers = new Map();
 export function startDeleteWorksManager() {
     console.log("startDeleteWorksManager() appelé");
 
+    document.querySelector("#remove-work-error").textContent = "";
+
     if (deleteButtons.length > 0) {
         console.log("deleteButtons déjà initialisé");
         return;
@@ -130,8 +132,12 @@ export function stopDeleteWorksManager() {
 // Supprimer un travail et mettre à jour l'affichage
 const deleteWorkAndUpdate = async (id) => {
     console.log("deleteWorkAndUpdate() appelé avec id :", id);
-    const deleteResult = await deleteWork(id);  
-    if(deleteResult) {
+    const errorElement = document.querySelector("#remove-work-error");
+    errorElement.textContent = "";
+    const deleteResult = await deleteWork(id);
+    if(deleteResult.error) {
+        errorElement.textContent = deleteResult.error;
+    } else {
         updateWorks();
     }
 };
