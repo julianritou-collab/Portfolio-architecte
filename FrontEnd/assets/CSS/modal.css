@@ -179,12 +179,22 @@
     font-weight: 500;
 }
 
+.image-input:focus + .upload-button,
 .upload-button:hover {
     cursor: pointer;
     background: #306685;
     color: #CBD6DC;
 }
 
+.delete-image{
+    display: none;
+}
+
+.upload-field.has-image .delete-image{
+    display: block;
+}
+
+.delete-image:focus,
 .delete-image:hover {
     cursor: pointer;
     position: relative;
@@ -202,13 +212,15 @@
     display: none; 
 }
 
+.delete-image:focus .delete-tooltip,
 .delete-image:hover .delete-tooltip {
     display: block;
 }
 
 /* bouton par défaut "choisir fichier" masqué*/
 .image-input {
-    display: none;
+    position: absolute;
+    left: -9999px;
 }
 /* info sur le fichier téléchargé */
 .upload-file-info {
@@ -226,6 +238,7 @@
 /* masquer les éléments de la zone de téléchargement d'image une fois qu'une image a été téléchargée */
 .upload-field.has-image .upload-icon,
 .upload-field.has-image .upload-button,
+.upload-field.has-image .image-input,
 .upload-field.has-image .upload-file-info {
     display: none;
 }

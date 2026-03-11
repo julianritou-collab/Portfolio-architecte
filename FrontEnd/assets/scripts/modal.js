@@ -102,9 +102,11 @@ const initAddForm = () => {
     const categoryInput = form.querySelector("#category");
     initCategoryOptions(categoryInput);
     resetForm(form);
+    form.querySelector("#add-work-error").textContent = "";
 
     if(addEventInitialized)
         return;
+
     console.log("Initialisation des événements du formulaire d'ajout de travaux");
     // Ajouter un écouteur d'événement pour l'input de l'image afin d'afficher un aperçu de l'image sélectionnée
     imageInput.addEventListener("change", () => {
@@ -170,6 +172,8 @@ const displayImagePreview = (form) => {
     const imageInput = form.querySelector("#image");
     const uploadPreview = form.querySelector(".upload-preview");
     const uploadField = form.querySelector(".upload-field");
+    const error = form.querySelector("#add-work-error");
+    error.textContent = "";
     if (!imageInput.files || imageInput.files.length === 0) {
         console.log("Aucun fichier sélectionné");
         uploadPreview.src = './assets/images/placeholder.jpeg';
@@ -183,7 +187,7 @@ const displayImagePreview = (form) => {
 
     if (!allowedTypes.includes(selectedFile.type) || selectedFile.size > maxSize) {
         console.error(`Fichier ${selectedFile.name} non valide`);
-        alert(`Fichier ${selectedFile.name} non valide.\nVeuillez sélectionner une image au format JPG, JPEG ou PNG de moins de 4 Mo.`);
+        error.textContent = `Fichier "${selectedFile.name}" non valide. Veuillez sélectionner une image JPG, JPEG ou PNG de moins de 4 Mo !`;
         imageInput.value = "";
         uploadPreview.src = './assets/images/placeholder.jpeg';
         uploadPreview.style.display = "none";
@@ -219,6 +223,8 @@ const doSubmitForm = async (form) => {
     const imageInput = form.querySelector("#image");
     const titleInput = form.querySelector("#title");
     const categorySelect = form.querySelector("#category");
+    const error = form.querySelector("#add-work-error");
+    error.textContent = "";
 
     const formData = new FormData();
     formData.append("image", imageInput.files[0]);
@@ -226,7 +232,11 @@ const doSubmitForm = async (form) => {
     formData.append("category", categorySelect.value);
     // Envoyer les données à l'API pour ajouter le travail
     const response = await submitWork(formData);
-    if(response) {
+    if(response.error)
+    {
+        error.textContent = response.error;
+        resetForm(form);
+    } else {
         // Si l'ajout a réussi, réinitialiser le formulaire et mettre à jour les travaux affichés dans la modale
         resetForm(form);
         updateWorks();

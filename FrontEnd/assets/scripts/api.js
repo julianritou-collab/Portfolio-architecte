@@ -116,27 +116,29 @@ export const submitWork = async (formData) => {
             body: formData
         });
         if(response.status === 400) {
-            console.error("Données invalides pour l'ajout du travail");
-            alert("Données invalides pour l'ajout du travail.\n Veuillez vérifier les champs et réessayer.");
-            return null;
+            const error = new Error("Données invalides pour l'ajout du travail. Veuillez vérifier les champs et réessayer !" );
+            console.log(error);
+            return { error: error.message };
         } else if (response.status === 401) {
-            console.error("Non autorisé à ajouter le travail");
-            alert("Non autorisé à ajouter le travail.\n Veuillez vous reconnecter et réessayer.");
-            return null;
+            const error = new Error("Non autorisé à ajouter le travail. Veuillez vous reconnecter et réessayer !");
+            console.log(error);
+            return { error: error.message };
         } else if(response.status === 500) {
-            console.error("Erreur innattendue lors de l'ajout du travail");
-            alert("Erreur innattendue lors de l'ajout du travail.\n Veuillez réessayer plus tard.");
-            return null;     
+            const error = new Error("Erreur innattendue lors de l'ajout du travail. Veuillez réessayer plus tard !");
+            console.log(error);
+            return { error: error.message };    
         } else if (!response.ok) {
-            throw new Error("Une erreur est survenue lors de l'ajout du travail. Veuillez réessayer plus tard.");
+            const error = new Error("Une erreur est survenue lors de l'ajout du travail. Veuillez réessayer plus tard !");
+            console.log(error);
+            return { error: error.message };
         }
         const data = await response.json();
         console.log("Travail ajouté :", data);
         return data;
     } catch (error) {
-        console.error(error);
-        alert("Une erreur est survenue lors de l'ajout du travail.\n Veuillez réessayer plus tard.");
-        return null;
+        console.log(error);
+        const message = "Une erreur est survenue lors de l'ajout du travail. Veuillez réessayer plus tard !";
+        return { error: message };
     }
 
 };
