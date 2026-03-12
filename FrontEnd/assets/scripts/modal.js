@@ -6,6 +6,7 @@ let modal=null;
 let previouslyFocusedElement = null;
 let addEventInitialized = false;
 let sliderInitialized = false;
+let urlPreview = null;
 
 //point d'entrée gestion de la modale
 export const modalManager = () => {
@@ -44,9 +45,9 @@ const openModal = async(e) => {
 // Fermer la modale
 const closeModal = (e) => {
     console.log("closeModal() appelé");
-    e.preventDefault();
     if(modal === null)
         return;
+    e.preventDefault();
     // Arrêter la gestion de la suppression des travaux dans la modale  
     stopDeleteWorksManager();
     if (previouslyFocusedElement) {
@@ -60,7 +61,13 @@ const closeModal = (e) => {
     modal.removeEventListener("click", closeModal);
     modal.querySelector(".modal-close").removeEventListener("click", closeModal);
     modal.querySelector(".modal-wrapper").removeEventListener("click", stopPropagation);
+    // Nettoyer la mémoire de aperçu d'image si elle existe
+    if(urlPreview) {
+        URL.revokeObjectURL(urlPreview);
+        urlPreview = null;
+    }
     // Cacher la modale
+    resetSliderPosition();
     modal.style.display = "none";
     modal = null;
 };
@@ -71,9 +78,18 @@ const stopPropagation = (e) => {
 };
 // Fermer la modale avec la touche "Escape"
 window.addEventListener("keydown", function(e) {
+    if(modal === null)
+        return;
     if(e.key === "Escape" || e.key === "Esc") 
         closeModal(e);
 });
+// resetSliderPosition() : fonction pour réinitialiser la position du slider de la modale à la galerie photo
+function resetSliderPosition() {
+    const slider = document.querySelector(".modal-content");
+    slider.removeAttribute("style");
+    const left = document.querySelector('.modal-back');
+    left.style.display = "none";
+}
 // Gérer le slider (Galerie photo <-> Ajout photo) dans la modale
 function sliderManager() {
     console.log("sliderManager() appelé");
@@ -136,6 +152,13 @@ const initAddForm = () => {
 const initCategoryOptions = (categoryInput) => {
     console.log("initCategoryOptions() appelé");
     categoryInput.innerHTML = "";
+    const placeholder = document.createElement("option");
+    placeholder.value = "";
+    placeholder.textContent = "Sélectionner une catégorie";
+    placeholder.disabled = true;
+    placeholder.selected = true;
+    categoryInput.appendChild(placeholder);
+
     if(categories === null || categories.length === 0) {
         return;
     }
@@ -194,7 +217,13 @@ const displayImagePreview = (form) => {
         uploadField.classList.remove("has-image");
         return;
     }
-    uploadPreview.src = URL.createObjectURL(selectedFile);
+
+    if (urlPreview) {
+        URL.revokeObjectURL(urlPreview);
+        urlPreview = null;
+    }
+    urlPreview = URL.createObjectURL(selectedFile);
+    uploadPreview.src = urlPreview;
     uploadPreview.style.display = "block";
     uploadField.classList.add("has-image");
 };
