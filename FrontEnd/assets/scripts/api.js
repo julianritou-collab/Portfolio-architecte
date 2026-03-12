@@ -1,11 +1,12 @@
 //api.js : gère les appels à l'API 
 
+const apiBaseUrl = 'http://localhost:5678/api'; // URL de base de l'API
 
 // Récupérer les catégories depuis l'API
 export const getCategories = async () => {
     console.log("getCategories() appelé");
     try {
-        const response = await fetch('http://localhost:5678/api/categories');       
+        const response = await fetch(`${apiBaseUrl}/categories`);       
         if (!response.ok) {
             throw new Error('Erreur lors de la récupération des catégories');
         }
@@ -22,7 +23,7 @@ export const getCategories = async () => {
 export const getWorks = async () => {
     console.log("getWorks() appelé");
     try {
-        const response = await fetch('http://localhost:5678/api/works');
+        const response = await fetch(`${apiBaseUrl}/works`);
         if (!response.ok) {
             throw new Error('Erreur lors de la récupération des travaux');
         }
@@ -43,7 +44,7 @@ export const login = async (email, password) => {
             email: email,
             password: password
         };
-        const response = await fetch('http://localhost:5678/api/users/login', {
+        const response = await fetch(`${apiBaseUrl}/users/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -75,7 +76,7 @@ export const deleteWork = async (id) => {
     console.log("deleteWork() appelé avec id :", id);
     const token = localStorage.getItem("token");
     try {
-        const response = await fetch(`http://localhost:5678/api/works/${id}`, {
+        const response = await fetch(`${apiBaseUrl}/works/${id}`, {
             method: 'DELETE',
             headers: {
                 'Authorization': `Bearer ${token}`
@@ -109,7 +110,7 @@ export const submitWork = async (formData) => {
     console.log("submitWork() appelé avec formData :", formData);
     const token = localStorage.getItem("token");
     try {
-        const response = await fetch('http://localhost:5678/api/works', {
+        const response = await fetch(`${apiBaseUrl}/works`, {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${token}`
